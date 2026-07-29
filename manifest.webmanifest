@@ -1,0 +1,20 @@
+{
+  "name": "BREWWW Companion Research Prototype",
+  "short_name": "Brew Companion",
+  "description": "BREWWW Companion 모바일 사용성 테스트 프로토타입",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F2F2F7",
+  "theme_color": "#EFEFF4",
+  "icons": [
+    {
+      "src": "./sorso-logo-stacked.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

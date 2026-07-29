@@ -1,0 +1,30 @@
+/* SORSO Motion
+   Mood: "향이 천천히 다가와 번지듯" — aroma slowly approaching and spreading.
+   No neon, no looping shake, no harsh zoom. Fades, soft settle, single damped overshoot. */
+
+:root {
+  --ease-sorso: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+
+  --dur-micro: 160ms; /* @kind other */
+  --dur-hover: 240ms; /* @kind other */
+  --dur-settle: 320ms; /* @kind other */
+  --dur-fade: 300ms; /* @kind other */
+  --dur-panel: 420ms; /* @kind other */
+
+  /* Interaction scale steps (subtle) */
+  --scale-hover: 1.03; /* @kind other */
+  --scale-active: 1.045; /* @kind other */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-micro: 0ms; /* @kind other */
+    --dur-hover: 0ms; /* @kind other */
+    --dur-settle: 0ms; /* @kind other */
+    --dur-fade: 0ms; /* @kind other */
+    --dur-panel: 0ms; /* @kind other */
+    --scale-hover: 1; /* @kind other */
+    --scale-active: 1; /* @kind other */
+  }
+}

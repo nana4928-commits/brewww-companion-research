@@ -1,0 +1,38 @@
+/* SORSO Spacing, radius, shadow, layout.
+   여백을 넉넉히, 과하지 않게 (Refined). 8px-based rhythm. */
+
+:root {
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Radius — soft, not bubbly. Cards use 16px; pills fully round. */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* Hairline width */
+  --hairline-w: 1px;
+
+  /* Shadows — warm ink-toned, soft. No hard black. */
+  --shadow-card: 0 2px 8px rgba(58, 52, 46, 0.06);
+  --shadow-hover: 0 6px 18px rgba(58, 52, 46, 0.16);
+  --shadow-active: 0 10px 28px rgba(58, 52, 46, 0.22);
+  --shadow-panel: 0 12px 40px rgba(58, 52, 46, 0.12);
+
+  /* Layout */
+  --container-max: 1200px;
+  --container-wide: 1440px;
+  --content-max: 720px;
+}

@@ -1,0 +1,71 @@
+/* SORSO Color System
+   ────────────────────────────────────────────────────────
+   Aroma Wheel 10색 — 색은 제품 향미를 나타낼 때만. 포인트 컬러는 최소한으로.
+   Cream/white 교차 배경 + 다크(니어블랙) 섹션. Korea 단청(dancheong) roots. */
+
+:root {
+  /* ── Aroma families (flavor-only accents) ── */
+  --aroma-floral: #F7CBD5;   /* Hanji Blossom */
+  --aroma-fruity: #E55A5A;   /* Persimmon Rose */
+  --aroma-citrus: #F9C06E;   /* Gardenia Yellow */
+  --aroma-sweet: #D68B47;    /* Amber Honey */
+  --aroma-nutty: #8A7A64;    /* Rice Beige */
+  --aroma-cacao: #56392C;    /* Cocoa Brown */
+  --aroma-winey: #6B2541;    /* Wine Plum */
+  --aroma-roasted: #332E2A;  /* Ink Charcoal */
+  --aroma-earthy: #287486;   /* Deep Teal-Blue */
+  --aroma-herb: #88AD84;     /* Celadon Sage */
+
+  /* Soft tints for large fills / segment washes */
+  --aroma-floral-soft: #FCEAEF;
+  --aroma-fruity-soft: #F7D5D2;
+  --aroma-citrus-soft: #FDEBC9;
+  --aroma-sweet-soft: #EFD3B4;
+  --aroma-herb-soft: #DCE7D9;
+  --aroma-earthy-soft: #CFE0E3;
+
+  /* ── Neutrals — 한지 계열 cream + 순백 교차 ── */
+  --hanji-cream: #FAF4EA;    /* primary page background (HANJI) */
+  --moon-white: #F4F1EA;     /* Moon-jar White — soft surface */
+  --pure-white: #FFFFFF;     /* 순백 — crossing background / cards */
+  --buncheong: #CCCAC6;      /* Buncheong Grey */
+  --near-black: #33312E;     /* dark section base */
+  --near-black-2: #3A362F;   /* dark section raised surface */
+
+  /* ── Ink / text ── */
+  --ink: #3A342E;            /* primary text */
+  --ink-grey: #45403B;       /* secondary ink */
+  --sub: #8A8175;            /* muted / captions */
+  --hairline: #B8AE9E;       /* 1px borders, dividers */
+  --hairline-soft: #D9D0C0;  /* faint hairline on cream */
+
+  /* ── Warm functional tints (from product cards) ── */
+  --warn-bg: #EFE3D8;
+  --warn-ink: #8A5A2E;
+  --muted-chip-bg: #EEE6E0;
+
+  /* ── Semantic aliases ── */
+  --bg-page: var(--hanji-cream);
+  --bg-alt: var(--pure-white);
+  --bg-dark: var(--near-black);
+  --surface: var(--pure-white);
+  --surface-soft: var(--moon-white);
+  --surface-card: rgba(255, 255, 255, 0.72);
+  --surface-dark: var(--near-black-2);
+
+  --text-primary: var(--ink);
+  --text-secondary: var(--ink-grey);
+  --text-muted: var(--sub);
+  --text-on-dark: var(--moon-white);
+  --text-on-dark-muted: #A79F91;
+
+  --border: var(--hairline);
+  --border-soft: var(--hairline-soft);
+  --border-on-dark: rgba(244, 241, 234, 0.18);
+
+  /* single brand pop — used sparingly (logo accent, key CTA) */
+  --accent: var(--aroma-fruity);
+  --accent-ink: #C34646;
+
+  --focus-ring: var(--ink);
+}
