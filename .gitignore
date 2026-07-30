@@ -1,0 +1,99 @@
+# BREWWW Companion — public prototype safety rules
+#
+# This repository should contain only the browser-ready research prototype.
+# Never commit real credentials, private research data, or hardware secrets.
+
+# Environment variables and local configuration
+.env
+.env.*
+!.env.example
+*.env
+config.local.*
+*.local.json
+
+# API keys, service credentials, and authentication files
+secrets/
+secret/
+credentials/
+credential/
+private/
+*.secret
+*.secrets
+*.credentials.json
+service-account*.json
+google-services.json
+GoogleService-Info.plist
+
+# Private keys, certificates, and signing material
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+id_rsa
+id_ed25519
+
+# Local databases, database exports, and backend state
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sql
+*.dump
+*.backup
+*.bak
+database/
+backups/
+supabase/
+.firebase/
+firebase-debug.log
+
+# Private research data and participant information
+participants/
+research-raw/
+research-private/
+interviews/
+responses/
+exports/
+*.csv
+*.tsv
+*.xlsx
+*.xls
+
+# Design/source documents not intended for the public prototype
+scraps/
+source/
+working/
+*.fig
+*.sketch
+*.psd
+*.ai
+*.doc
+*.docx
+*.pdf
+*.ppt
+*.pptx
+
+# Package, build, cache, and editor files
+node_modules/
+vendor/
+dist/
+build/
+.next/
+.cache/
+.tmp/
+tmp/
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local development and deployment metadata
+.wrangler/
+.vercel/
+.netlify/
+.openai/

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'brewww-companion-research-v2';
+const CACHE_NAME = 'brewww-companion-research-v3';
 const APP_SHELL = [
   './index.html',
   './data.js',
@@ -12,7 +12,10 @@ const APP_SHELL = [
   './ds-spacing.css',
   './ds-typography.css',
   './ds-styles.css',
-  './ds-bundle.js'
+  './ds-bundle.js',
+  './react.production.min.js',
+  './react-dom.production.min.js',
+  './babel.min.js'
 ];
 
 self.addEventListener('install', (event) => {

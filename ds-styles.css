@@ -1,3 +1,2 @@
-/* Token styles are loaded explicitly by index.html for the flat GitHub Pages build. */
-
-/* Flattened build: no nested token imports. */
+/* SORSO Design System — global entry point.
+   Consumers link this one file. Keep it @import lines only. */

@@ -20,4 +20,11 @@ Serve this directory over HTTP rather than opening `index.html` directly:
 python3 -m http.server 4173
 ```
 
-Then open `http://localhost:4173`.
+Then open the local address printed by the server.
+
+## Privacy
+
+This research build contains no personal API key, personal API endpoint, or
+private backend address. Runtime libraries are stored inside this repository,
+and typography uses system fonts, so the prototype does not depend on
+third-party CDN addresses.
