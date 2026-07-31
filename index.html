@@ -1577,15 +1577,15 @@ const AROMA_VAR = {
 };
 const ADJUST = {
   acidity: { label: '산미 ↑', sub: '더 산뜻하게', changed: '산미를 높이는 실험', arrow: 'up', dTemp: -2, dGrind: -1,
-    tip: '좀 더 산미를 원한다면 — 물 온도를 2°C 낮추고 분쇄를 한 단계 곱게 해보세요. 초반 추출이 강조돼 산미가 또렷해져요.' },
+    tip: '좀 더 산미를 원한다면 — 물 온도를 2°C 낮추고 코만단테 분쇄도를 1 클릭 낮춰보세요. 초반 추출이 강조돼 산미가 또렷해져요.' },
   sweet: { label: '단맛 ↑', sub: '더 달게', changed: '단맛을 높이는 실험', arrow: 'up', dTime: 5,
     tip: '단맛을 끌어올리려면 — 뜸을 5초 늘리고 물줄기를 가늘게 부어보세요. 당도가 차분하게 올라와요.' },
   body: { label: '바디 ↑', sub: '더 묵직하게', changed: '바디를 높이는 실험', arrow: 'up', dDose: 1, dGrind: -1,
-    tip: '바디를 키우려면 — 원두를 1g 늘리고 분쇄를 살짝 곱게. 농도와 무게감이 살아나요.' },
+    tip: '바디를 키우려면 — 원두를 1g 늘리고 코만단테 분쇄도를 1 클릭 낮춰보세요. 농도와 무게감이 살아나요.' },
   bitter: { label: '쓴맛 ↓', sub: '부드럽게', changed: '쓴맛을 줄이는 실험', arrow: 'down', dTemp: -2, dTime: -5,
     tip: '쓴맛을 줄이려면 — 물 온도를 2°C 낮추고 추출 시간을 조금 줄여보세요. 텁텁함이 가벼워져요.' },
   clean: { label: '깔끔함 ↑', sub: '클린하게', changed: '클린함을 높이는 실험', arrow: 'up', dGrind: 1, dTime: -3,
-    tip: '더 깔끔하게 — 분쇄를 한 단계 굵게 하고 마지막 붓기를 줄여보세요. 여운이 산뜻해져요.' },
+    tip: '더 깔끔하게 — 코만단테 분쇄도를 1 클릭 높이고 마지막 붓기를 줄여보세요. 여운이 산뜻해져요.' },
 };
 function fmtDose(n) { return Number.isInteger(n) ? String(n) : n.toFixed(1); }
 function parseTimeSec(t) { const m = /^(\d+):(\d\d)$/.exec(String(t)); return m ? (+m[1]) * 60 + (+m[2]) : null; }
@@ -1596,7 +1596,7 @@ function baseGrindClicks(g) {
   if (/굵/.test(t)) return 28;
   return 20;
 }
-function grindStepLabel(baseGrind, step) { return (baseGrindClicks(baseGrind) + step) + '클릭'; }
+function grindStepLabel(baseGrind, step) { return (baseGrindClicks(baseGrind) + step) + ' 클릭'; }
 
 function hashSeed(str) {
   let h = 0;
@@ -2032,7 +2032,7 @@ class Component extends DCLogic {
     const bean = this.getBean(beanId);
     const group = s.labData.find((g) => g.beanId === beanId);
     const baseExp = group ? (group.experiments.find((e) => e.best) || group.experiments[group.experiments.length - 1]) : null;
-    const base = this.entryBaseRecipe(s) || { dose: 16, water: 240, temp: 92, grind: '중간', time: '2:30' };
+    const base = this.entryBaseRecipe(s) || { dose: 16, water: 240, temp: 92, grind: '20 클릭', time: '2:30' };
     const cfg = ADJUST[adjust] || { changed: '', arrow: '' };
     const cur = s.entry.custom || this.initEntryCustom(base);
     const grind = grindStepLabel(base.grind, cur.grindStep);
@@ -2040,7 +2040,7 @@ class Component extends DCLogic {
     const parts = [];
     if (cur.dose !== base.dose) parts.push('원두 ' + fmtDose(base.dose) + '→' + fmtDose(cur.dose) + 'g');
     if (cur.temp !== base.temp) parts.push('온도 ' + base.temp + '→' + cur.temp + '°C');
-    if (cur.grindStep) parts.push('분쇄 ' + Math.abs(cur.grindStep) + '단계 ' + (cur.grindStep < 0 ? '곱게' : '굵게'));
+    if (cur.grindStep) parts.push('코만단테 분쇄도 ' + grindStepLabel(base.grind, 0) + ' → ' + grind);
     if (cur.timeSec != null && time !== base.time) parts.push('시간 ' + base.time + '→' + time);
     const changed = parts.length ? parts.join(' · ') : (cfg.changed || '기준 레시피 그대로');
     const seq = group ? Math.max(0, ...group.experiments.map((e) => e.seq)) + 1 : 1;
@@ -2396,7 +2396,7 @@ class Component extends DCLogic {
         return {
           seqLabel: 'EXP ' + String(e.seq).padStart(2, '0'), date: e.date, note: e.note || '', changed: e.changed,
           arrow: arrowGlyph[e.arrow] || '', hasArrow: !!arrowGlyph[e.arrow], isBest: !!e.best, notLast: i !== arr.length - 1,
-          readout: [{ k: 'Temp', v: e.temp + '°C' }, { k: 'Dose', v: e.dose + 'g' }, { k: 'Grind', v: e.grind }, { k: 'Time', v: e.time }],
+          readout: [{ k: 'Temp', v: e.temp + '°C' }, { k: 'Dose', v: e.dose + 'g' }, { k: 'Grind · Comandante', v: e.grind }, { k: 'Time', v: e.time }],
           taste: [{ label: '산미', v: e.taste.acidity, barStyle: mkBar(e.taste.acidity) }, { label: '바디', v: e.taste.body, barStyle: mkBar(e.taste.body) }, { label: '밸런스', v: e.taste.balance, barStyle: mkBar(e.taste.balance) }],
           ovrLabel: o.l,
           ovrStyle: `flex:none;display:inline-flex;align-items:center;height:22px;padding:0 11px;border-radius:var(--radius-pill);font-size:11px;font-weight:600;letter-spacing:-0.01em;color:#fff;background:${o.c};`,
@@ -2442,7 +2442,7 @@ class Component extends DCLogic {
     const entryRcp = entryBase ? { dose: entryBase.dose, temp: entryBase.temp, grind: entryBase.grind, time: entryBase.time }
       : (entryBeanObj ? { dose: entryBeanObj.recipe.dose, temp: entryBeanObj.recipe.temp, grind: entryBeanObj.recipe.grind, time: entryBeanObj.recipe.time } : null);
     const entryBaseLabel = entryBase ? '나의 최적값 기준' : '공식 레시피 기준';
-    const entryRecipeRows = entryRcp ? [{ k: 'Dose', v: entryRcp.dose + 'g' }, { k: 'Temp', v: entryRcp.temp + '°C' }, { k: 'Grind', v: entryRcp.grind }, { k: 'Time', v: entryRcp.time }] : [];
+    const entryRecipeRows = entryRcp ? [{ k: 'Dose', v: entryRcp.dose + 'g' }, { k: 'Temp', v: entryRcp.temp + '°C' }, { k: 'Grind · Comandante', v: entryRcp.grind }, { k: 'Time', v: entryRcp.time }] : [];
     const entryBeanName = entryBeanObj ? entryBeanObj.name : (entry.beanId || '원두를 선택하세요');
     const adjustOptions = Object.keys(ADJUST).map((k) => { const active = entry.adjust === k; const a = ADJUST[k]; return { label: a.label, sub: a.sub, onClick: () => this.setEntryAdjust(k),
       style: `flex:none;text-align:left;padding:12px 14px;border:1px solid ${active ? 'var(--ink)' : 'var(--hairline-soft)'};border-radius:var(--radius-md);background:${active ? 'var(--ink)' : 'var(--pure-white)'};color:${active ? 'var(--moon-white)' : 'var(--ink)'};min-width:112px;`,
@@ -2475,7 +2475,7 @@ class Component extends DCLogic {
         minusText: '−', plusText: '+', minusStyle: stepBtn(curTemp <= 15, true), plusStyle: stepBtn(curTemp >= 100, true),
         onMinus: () => this.adjustEntryField('temp', -1), onPlus: () => this.adjustEntryField('temp', 1) }; })(),
       (() => { const changed = curGrindStep !== 0; return {
-        label: '분쇄도 (Grind)', value: grindStepLabel(entryRcp.grind, curGrindStep), rowStyle: rowSt,
+        label: '분쇄도 (Comandante)', value: grindStepLabel(entryRcp.grind, curGrindStep), rowStyle: rowSt,
         delta: changed ? '기준 ' + grindStepLabel(entryRcp.grind, 0) : '', deltaStyle: changed ? deltaOn : 'display:none;',
         minusText: '−', plusText: '+', minusStyle: stepBtn(curGrindStep <= -8, true), plusStyle: stepBtn(curGrindStep >= 8, true),
         onMinus: () => this.adjustEntryField('grind', -1), onPlus: () => this.adjustEntryField('grind', 1) }; })(),
@@ -2508,7 +2508,7 @@ class Component extends DCLogic {
         koName: parts[0], enName: parts[1] || '', brewCount: g.experiments.length,
         dotStyle: `flex:none;width:12px;height:12px;border-radius:50%;background:${color};`,
         stripeStyle: `position:absolute;left:0;top:0;bottom:0;width:5px;border-radius:var(--radius-lg) 0 0 var(--radius-lg);background:${color};`,
-        recipeRows: [{ k: 'Method', v: r.method }, { k: 'Temp', v: r.temp + '°C' }, { k: 'Ratio', v: '1 : ' + ratio }, { k: 'Dose', v: r.dose + 'g' }, { k: 'Grind', v: r.grind }, { k: 'Time', v: r.time }],
+        recipeRows: [{ k: 'Method', v: r.method }, { k: 'Temp', v: r.temp + '°C' }, { k: 'Ratio', v: '1 : ' + ratio }, { k: 'Dose', v: r.dose + 'g' }, { k: 'Grind · Comandante', v: r.grind }, { k: 'Time', v: r.time }],
         myRecipe: `${best.dose}g · ${best.temp}°C · ${best.grind} · ${best.time}`,
         myTaste: [{ label: '산미', v: best.taste.acidity, barStyle: mkBar(best.taste.acidity) }, { label: '바디', v: best.taste.body, barStyle: mkBar(best.taste.body) }, { label: '밸런스', v: best.taste.balance, barStyle: mkBar(best.taste.balance) }],
         myNote: best.note, ovrLabel: o.l,
@@ -2523,7 +2523,7 @@ class Component extends DCLogic {
     const labBeanId = s.brewLabBeanId || (s.shelf[0] && s.shelf[0].id);
     const labShelfItem = s.shelf.find((x) => x.id === labBeanId) || s.shelf[0] || null;
     const labBean = labShelfItem ? this.getBean(labShelfItem.id) : null;
-    const labRcp = labBean ? labBean.recipe : { method: 'V60', dose: 15, water: 240, temp: 92, time: '2:30', grind: '중간' };
+    const labRcp = labBean ? labBean.recipe : { method: 'V60', dose: 15, water: 240, temp: 92, time: '2:30', grind: '20 클릭' };
     const labRatio = Math.round((labRcp.water / labRcp.dose) * 10) / 10;
     const brewLab = {
       hasBean: !!labShelfItem,
@@ -2534,7 +2534,7 @@ class Component extends DCLogic {
       readouts: [
         { k: 'Method', v: labRcp.method }, { k: 'Ratio', v: '1 : ' + labRatio },
         { k: 'Dose', v: labRcp.dose + ' g' }, { k: 'Water', v: labRcp.water + ' g' },
-        { k: 'Grind', v: labRcp.grind }, { k: 'Time', v: labRcp.time },
+        { k: 'Grind · Comandante', v: labRcp.grind }, { k: 'Time', v: labRcp.time },
       ],
       beans: s.shelf.map((it) => {
         const active = it.id === labBeanId;
@@ -2587,7 +2587,7 @@ class Component extends DCLogic {
         flavorNote: bean.flavorNote, balanceNote: bean.balanceNote, whyForYou: bean.whyForYou,
         recipeRows: [
           { k: 'METHOD', v: bean.recipe.method }, { k: 'DOSE', v: bean.recipe.dose + 'g' }, { k: 'WATER', v: bean.recipe.water + 'g' },
-          { k: 'TEMP', v: bean.recipe.temp + '°C' }, { k: 'TIME', v: bean.recipe.time }, { k: 'GRIND', v: bean.recipe.grind },
+          { k: 'TEMP', v: bean.recipe.temp + '°C' }, { k: 'TIME', v: bean.recipe.time }, { k: 'GRIND · COMANDANTE', v: bean.recipe.grind },
         ],
         priceLabel: bean.price.toLocaleString('ko-KR'), size: bean.size, roastDate: bean.roastDate, nextRoast: bean.nextRoast,
       };

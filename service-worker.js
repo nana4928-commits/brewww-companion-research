@@ -1,4 +1,4 @@
-const CACHE_NAME = 'brewww-companion-research-v3';
+const CACHE_NAME = 'brewww-companion-research-v4';
 const APP_SHELL = [
   './index.html',
   './data.js',
